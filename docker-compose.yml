@@ -1,13 +1,14 @@
-version: "3.8"
-
+version: '3'
 services:
   frontend:
     build:
       context: ./frontend
     ports:
-      - "80:80"
-    depends_on:
-      - backend
+      - "5173:80"
+    environment:
+      - VITE_CLIENT_ID=${CLIENT_ID}
+      - VITE_REACT_REDIRECT=${REACT_REDIRECT}
+      - VITE_API_BASE_URL=${API_BASE_URL}
 
   backend:
     build:
