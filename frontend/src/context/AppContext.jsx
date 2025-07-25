@@ -1,4 +1,3 @@
-// src/context/AppContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 
 export const AppContext = createContext();
@@ -7,6 +6,7 @@ export const AppProvider = ({ children }) => {
   const [newsConfig, setNewsConfig] = useState(null);
   const [promptConfig, setPromptConfig] = useState(null);
   const [githubToken, setGithubToken] = useState(null);
+  const [socialConfig, setSocialConfig] = useState(null); // ✅ 新增這行
 
   useEffect(() => {
     const tokenFromStorage = localStorage.getItem('github_token');
@@ -15,9 +15,19 @@ export const AppProvider = ({ children }) => {
     }
   }, []);
 
-
   return (
-    <AppContext.Provider value={{ newsConfig, setNewsConfig, promptConfig, setPromptConfig, githubToken, setGithubToken }}>
+    <AppContext.Provider
+      value={{
+        newsConfig,
+        setNewsConfig,
+        promptConfig,
+        setPromptConfig,
+        githubToken,
+        setGithubToken,
+        socialConfig,
+        setSocialConfig,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

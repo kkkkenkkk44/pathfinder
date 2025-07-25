@@ -13,7 +13,7 @@ import {
 import { AppContext } from '../../context/AppContext';
 import { JoinFull } from '@mui/icons-material';
 
-const platforms = ['Facebook', 'Instagram', 'Threads', 'X'];
+const platforms = ['Facebook', 'Threads', 'Instagram', 'X'];
 const languages = [
   { label: '中文', code: 'zh' },
   { label: 'English', code: 'en' },
@@ -67,6 +67,7 @@ export default function PromptPanel({ onSave }) {
       image_prompt: imagePrompt,
       platform_prompts: platformTabs,
     };
+    console.log('儲存的 Prompt 設定:', allPrompts);
     setPromptConfig(allPrompts);
     if (onSave) onSave(allPrompts);
   };

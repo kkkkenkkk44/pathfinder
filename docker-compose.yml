@@ -9,6 +9,7 @@ services:
       - VITE_CLIENT_ID=${CLIENT_ID}
       - VITE_REACT_REDIRECT=${REACT_REDIRECT}
       - VITE_API_BASE_URL=${API_BASE_URL}
+    restart: unless-stopped
 
   backend:
     build:
@@ -19,3 +20,4 @@ services:
       - CLIENT_ID=${CLIENT_ID}
       - CLIENT_SECRET=${CLIENT_SECRET}
       - REDIRECT_URI=${REDIRECT_URI}
+    restart: unless-stopped

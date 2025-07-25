@@ -6,6 +6,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import ChatIcon from '@mui/icons-material/Chat';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ShareIcon from '@mui/icons-material/Share';
 
 const drawerWidth = 240;
 
@@ -18,7 +19,8 @@ export default function DrawerSidebar({ selectedTab, onSelect, mobileOpen, onClo
         {[
           { label: 'News', icon: <ArticleIcon /> },
           { label: 'Prompt', icon: <ChatIcon /> },
-          { label: 'SettingsReview', icon: <SettingsIcon /> },
+          { label: 'Social Media', icon: <ShareIcon /> },
+          { label: 'Settings Review', icon: <SettingsIcon /> },
           { label: 'Logout', icon: <LogoutIcon /> },
         ].map((item) => (
           <ListItemButton
