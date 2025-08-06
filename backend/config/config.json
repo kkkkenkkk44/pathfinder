@@ -7,11 +7,11 @@
       "https://edition.cnn.com/"
     ],
     "frequency_type": "daily",
-    "frequency_hour": "00",
-    "cron": "0 00 * * *",
-    "repo": "aaa",
-    "site_name": "ffff",
-    "custom_domain": "test2222.com"
+    "frequency_hour": "20",
+    "cron": "0 20 * * *",
+    "repo": "1111111",
+    "site_name": "My 111111",
+    "custom_domain": "test1111.com"
   },
   "prompt": {
     "summary_prompt": {
@@ -25,9 +25,16 @@
       "jp": "なたはプロのSEOニュースライターです。ニュース内容を、構造的で親しみやすく、ストーリー性があり、自然で読みやすい日本語の記事に書き換えるのが得意です。日本語で執筆し、一般の読者向けにSEO構造を持つHTML形式で出力してください。"
     },
     "image_prompt": "請為這篇文章生成一張符合主題、具吸引力的圖片，風格需寫實，避免過度誇張。",
-    "platform_prompts": {}
+    "platform_prompts": {
+      "Threads": {
+        "zh": "你是一位專業的行銷寫手，擅長撰寫 Threads 平台風格的短文，語氣活潑、資訊正確，適合一般大眾閱讀。你的任務是幫助讀者快速理解文章亮點，並產生點擊慾望。請用繁體中文撰寫。\n"
+      },
+      "Facebook": {
+        "zh": "你是一位專業的行銷寫手，擅長撰寫 Facebook 平台風格的短文，語氣活潑、資訊正確，適合一般大眾閱讀。你的任務是幫助讀者快速理解文章亮點，並產生點擊慾望。請用繁體中文撰寫。\n"
+      }
+    }
   },
-  "github_token": "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",
+  "github_token": "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",
   "social": {
     "post_frequency_type": "daily",
     "post_frequency_hour": "00",
@@ -41,11 +48,11 @@
     },
     {
       "image": "https://cancerfree.io/wp-content/uploads/2024/10/logo-v3.0-TC.png",
-      "link": "http://cancerfree.io/"
+      "link": "https://cancerfree.io/"
     },
     {
       "image": "https://cancerfree.io/wp-content/uploads/2024/10/logo-v3.0-TC.png",
-      "link": "http://cancerfree.io/"
+      "link": "https://cancerfree.io/"
     }
   ]
 }

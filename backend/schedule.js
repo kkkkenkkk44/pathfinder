@@ -11,21 +11,23 @@ const __dirname = dirname(__filename);
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-
-
 const configPath = path.resolve(__dirname, './config/config.json');
-
 const WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
-
-
 
 let previousNewsCron = null;
 let previousSocialCron = null;
 let newsTask = null;
 let socialTask = null;
 
-// ⏰ 每 30 秒檢查一次 config
+console.log('⏰ schedule.js started. Watching for config.json changes...');
+
+// 每 10 秒檢查一次 config.json
 setInterval(() => {
+  if (!fs.existsSync(configPath)) {
+    console.warn('⚠️ config.json not found yet, waiting...');
+    return;
+  }
+
   try {
     const raw = fs.readFileSync(configPath, 'utf8');
     const config = JSON.parse(raw);
@@ -40,9 +42,7 @@ setInterval(() => {
       newsTask = cron.schedule(currentNewsCron, async () => {
         console.log('📰 Triggering news webhook');
         try {
-          await axios.post(WEBHOOK_URL, {
-            ...config,
-          });
+          await axios.post(WEBHOOK_URL, { ...config });
           console.log('✅ News webhook sent');
         } catch (err) {
           console.error('❌ News webhook failed:', err.message);
@@ -53,7 +53,7 @@ setInterval(() => {
       previousNewsCron = currentNewsCron;
     }
 
-    // // 🔁 更新 Social 任務
+    // // 🔁 更新 Social 任務（如未來需要）
     // if (currentSocialCron && currentSocialCron !== previousSocialCron) {
     //   if (socialTask) socialTask.stop();
 
@@ -75,6 +75,6 @@ setInterval(() => {
     // }
 
   } catch (err) {
-    console.error('❌ Failed to read config.json:', err.message);
+    console.error('❌ Failed to read or parse config.json:', err.message);
   }
 }, 10 * 1000);
