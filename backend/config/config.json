@@ -1,17 +1,17 @@
 {
   "news": {
     "keywords": [
-      "cancer"
+      "sports"
     ],
     "urls": [
       "https://edition.cnn.com/"
     ],
     "frequency_type": "daily",
-    "frequency_hour": "20",
-    "cron": "0 20 * * *",
-    "repo": "1111111",
-    "site_name": "My 111111",
-    "custom_domain": "test1111.com"
+    "frequency_hour": "12",
+    "cron": "0 12 * * *",
+    "repo": "sports",
+    "site_name": "My Sports",
+    "custom_domain": "test11111.com"
   },
   "prompt": {
     "summary_prompt": {
@@ -26,11 +26,11 @@
     },
     "image_prompt": "請為這篇文章生成一張符合主題、具吸引力的圖片，風格需寫實，避免過度誇張。",
     "platform_prompts": {
-      "Threads": {
-        "zh": "你是一位專業的行銷寫手，擅長撰寫 Threads 平台風格的短文，語氣活潑、資訊正確，適合一般大眾閱讀。你的任務是幫助讀者快速理解文章亮點，並產生點擊慾望。請用繁體中文撰寫。\n"
-      },
       "Facebook": {
         "zh": "你是一位專業的行銷寫手，擅長撰寫 Facebook 平台風格的短文，語氣活潑、資訊正確，適合一般大眾閱讀。你的任務是幫助讀者快速理解文章亮點，並產生點擊慾望。請用繁體中文撰寫。\n"
+      },
+      "Threads": {
+        "zh": "你是一位專業的行銷寫手，擅長撰寫 Threads 平台風格的短文，語氣活潑、資訊正確，適合一般大眾閱讀。你的任務是幫助讀者快速理解文章亮點，並產生點擊慾望。請用繁體中文撰寫。\n"
       }
     }
   },

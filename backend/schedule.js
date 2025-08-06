@@ -41,6 +41,8 @@ setInterval(() => {
 
       newsTask = cron.schedule(currentNewsCron, async () => {
         console.log('📰 Triggering news webhook');
+        console.log(`🔗 Using webhook URL: ${WEBHOOK_URL}`);
+
         try {
           await axios.post(WEBHOOK_URL, { ...config });
           console.log('✅ News webhook sent');
