@@ -20,6 +20,7 @@ export default function DrawerSidebar({ selectedTab, onSelect, mobileOpen, onClo
           { label: 'News', icon: <ArticleIcon /> },
           { label: 'Prompt', icon: <ChatIcon /> },
           { label: 'Social Media', icon: <ShareIcon /> },
+          { label: 'Advertisement', icon: <ShareIcon /> },
           { label: 'Settings Review', icon: <SettingsIcon /> },
           { label: 'Logout', icon: <LogoutIcon /> },
         ].map((item) => (

@@ -1,0 +1,58 @@
+{
+  "news": {
+    "keywords": [
+      "cancer"
+    ],
+    "urls": [
+      "https://edition.cnn.com/"
+    ],
+    "frequency_type": "daily",
+    "frequency_hour": "20",
+    "cron": "0 20 * * *",
+    "repo": "0806",
+    "site_name": "My 0806",
+    "custom_domain": "test1111.com"
+  },
+  "prompt": {
+    "summary_prompt": {
+      "zh": "是一位專業的 SEO 新聞摘要寫手，擅長將新聞內容濃縮成具故事感、親切易懂、同時包含關鍵字的短篇摘要。請用繁體中文撰寫，適合放在文章開頭、社群貼文或搜尋引擎預覽中，並以 HTML 格式輸出（使用 <p> 包裹段落）。",
+      "en": "You are a professional SEO news summary writer. Your job is to distill news content into a short, engaging, and keyword-rich summary (300–500 words) in HTML format using <p> tags. The summary should be suitable for article previews, social posts, and search snippets.",
+      "jp": "あなたはプロのSEOニュース要約ライターです。ニュースをもとに、HTML形式（各段落を <p> タグで囲む）でストーリー性のある要約（300〜500字）を書いてください。記事プレビューや検索結果に適した形式です。"
+    },
+    "seo_prompt": {
+      "zh": "是一位專業的 SEO 新聞寫手，擅長將新聞內容改寫成結構清楚、語氣親切、有故事感又自然流暢的文章。請用繁體中文撰寫，適合一般大眾閱讀，並符合 SEO 寫作邏輯，文章需使用 HTML 格式產出。",
+      "en": "You are a professional SEO news writer who excels at turning news content into clear, friendly, story-driven, and naturally fluent articles. Write in English for a general audience with an SEO-optimized structure in HTML. The final text must read like native-level news writing.",
+      "jp": "なたはプロのSEOニュースライターです。ニュース内容を、構造的で親しみやすく、ストーリー性があり、自然で読みやすい日本語の記事に書き換えるのが得意です。日本語で執筆し、一般の読者向けにSEO構造を持つHTML形式で出力してください。"
+    },
+    "image_prompt": "請為這篇文章生成一張符合主題、具吸引力的圖片，風格需寫實，避免過度誇張。",
+    "platform_prompts": {
+      "Threads": {
+        "zh": "你是一位專業的行銷寫手，擅長撰寫 Threads 平台風格的短文，語氣活潑、資訊正確，適合一般大眾閱讀。你的任務是幫助讀者快速理解文章亮點，並產生點擊慾望。請用繁體中文撰寫。\n"
+      },
+      "Facebook": {
+        "zh": "你是一位專業的行銷寫手，擅長撰寫 Facebook 平台風格的短文，語氣活潑、資訊正確，適合一般大眾閱讀。你的任務是幫助讀者快速理解文章亮點，並產生點擊慾望。請用繁體中文撰寫。\n"
+      }
+    }
+  },
+  "github_token": "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",
+  "social": {
+    "post_frequency_type": "daily",
+    "post_frequency_hour": "00",
+    "post_frequency_day": "0",
+    "post_cron": "0 00 * * *"
+  },
+  "ads": [
+    {
+      "image": "https://cancerfree.io/wp-content/uploads/2024/10/logo-v3.0-TC.png",
+      "link": "https://cancerfree.io/"
+    },
+    {
+      "image": "https://cancerfree.io/wp-content/uploads/2024/10/logo-v3.0-TC.png",
+      "link": "https://cancerfree.io/"
+    },
+    {
+      "image": "https://cancerfree.io/wp-content/uploads/2024/10/logo-v3.0-TC.png",
+      "link": "https://cancerfree.io/"
+    }
+  ]
+}

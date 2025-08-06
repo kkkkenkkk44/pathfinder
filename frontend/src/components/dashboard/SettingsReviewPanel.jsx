@@ -14,9 +14,9 @@ import { AppContext } from '../../context/AppContext';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import ShareIcon from '@mui/icons-material/Share';
-import ScheduleIcon from '@mui/icons-material/Schedule';
+import ImageIcon from '@mui/icons-material/Image';
 
-const langLabels = { zh: '中文', en: 'English', ja: '日本語' };
+const langLabels = { zh: '中文', en: 'English', jp: '日本語' };
 const weekDayLabels = ['日', '一', '二', '三', '四', '五', '六'];
 
 export default function SettingsReviewPanel() {
@@ -25,6 +25,7 @@ export default function SettingsReviewPanel() {
     promptConfig,
     githubToken,
     socialConfig,
+    adConfig,
   } = useContext(AppContext);
 
   const handleSubmitToN8N = async () => {
@@ -38,17 +39,21 @@ export default function SettingsReviewPanel() {
       prompt: promptConfig,
       github_token: githubToken,
       social: socialConfig,
+      ads: adConfig,
     };
 
     console.log('📤 發送到 n8n 的資料:', payload);
 
     try {
-      const response = await axios.post(
-        'https://n8n-v2.avatarmedicine.xyz/webhook-test/2695e37b-3be2-4412-b2b0-cd491450b3b4',
+      // const response = await axios.post(
+      //   'https://n8n-v2.avatarmedicine.xyz/webhook-test/config',
+      //   payload
+      // );
+      const response2 = await axios.post(
+        'http://localhost:4000/save-config',
         payload
       );
-      alert('✅ 設定已成功送出');
-      console.log('✅ n8n 回應:', response.data);
+      alert('發送成功');
     } catch (err) {
       console.error('❌ 發送失敗:', err);
       alert('❌ 發送失敗，請查看 console');
@@ -56,13 +61,13 @@ export default function SettingsReviewPanel() {
   };
 
   return (
-    <Box p={2}>
+    <Box p={2} sx={{ maxWidth: '100%', overflowX: 'hidden' }}>
       <Typography variant="h5" fontWeight="bold" gutterBottom>
         所有儲存設定預覽
       </Typography>
 
       {/* 📰 新聞設定 */}
-      <Card variant="outlined" sx={{ mb: 3 }}>
+      <Card variant="outlined" sx={{ mb: 3, overflowX: 'hidden' }}>
         <CardContent>
           <Typography variant="h6"><NewspaperIcon sx={{ mr: 1 }} />新聞來源設定</Typography>
           <Divider sx={{ my: 1 }} />
@@ -91,11 +96,13 @@ export default function SettingsReviewPanel() {
           )}
           <Typography variant="body2">抓取時間：{newsConfig?.frequency_hour || '--'}:00</Typography>
           <Typography variant="body2">GitHub Repo：{newsConfig?.repo || '尚未設定'}</Typography>
+          <Typography variant="body2">網站名稱：{newsConfig?.site_name || '尚未設定'}</Typography>
+          <Typography variant="body2">自訂網域：{newsConfig?.custom_domain || '未使用'}</Typography>
         </CardContent>
       </Card>
 
       {/* ✍️ Prompt 設定 */}
-      <Card variant="outlined" sx={{ mb: 3 }}>
+      <Card variant="outlined" sx={{ mb: 3, overflowX: 'hidden' }}>
         <CardContent>
           <Typography variant="h6"><EditNoteIcon sx={{ mr: 1 }} />Prompt 設定</Typography>
           <Divider sx={{ my: 1 }} />
@@ -105,7 +112,10 @@ export default function SettingsReviewPanel() {
             {promptConfig?.summary_prompt
               ? Object.entries(promptConfig.summary_prompt).map(([lang, val]) => (
                   <Grid item xs={12} key={lang}>
-                    <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+                    <Typography
+                      variant="body2"
+                      sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+                    >
                       <strong>{langLabels[lang] || lang}：</strong><br />{val}
                     </Typography>
                   </Grid>
@@ -118,7 +128,10 @@ export default function SettingsReviewPanel() {
             {promptConfig?.seo_prompt
               ? Object.entries(promptConfig.seo_prompt).map(([lang, val]) => (
                   <Grid item xs={12} key={lang}>
-                    <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+                    <Typography
+                      variant="body2"
+                      sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+                    >
                       <strong>{langLabels[lang] || lang}：</strong><br />{val}
                     </Typography>
                   </Grid>
@@ -127,32 +140,39 @@ export default function SettingsReviewPanel() {
           </Grid>
 
           <Typography variant="subtitle2">圖片生成 Prompt</Typography>
-          <Typography variant="body2" sx={{ whiteSpace: 'pre-line', mb: 2 }}>
+          <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', mb: 2 }}>
             {promptConfig?.image_prompt || '尚未設定'}
           </Typography>
 
           <Typography variant="subtitle2">社群發文 Prompts</Typography>
           <Grid container spacing={1}>
             {promptConfig?.platform_prompts
-              ? Object.entries(promptConfig.platform_prompts).flatMap(([platform, langs]) =>
-                  Object.entries(langs).map(([lang, prompt], j) => (
-                    <Grid item xs={12} key={`${platform}-${lang}-${j}`}>
-                      <Chip label={`[${platform}][${langLabels[lang] || lang}] ${prompt}`} />
-                    </Grid>
-                  ))
-                )
+              ? Object.entries(promptConfig.platform_prompts)
+                  .filter(([_, langs]) =>
+                    Object.values(langs).some(prompt => prompt?.trim())
+                  )
+                  .flatMap(([platform, langs]) =>
+                    Object.entries(langs)
+                      .filter(([_, prompt]) => prompt?.trim())
+                      .map(([lang, prompt], j) => (
+                        <Grid item xs={12} key={`${platform}-${lang}-${j}`}>
+                          <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                            <strong>{platform} - {langLabels[lang] || lang}</strong><br />{prompt}
+                          </Typography>
+                        </Grid>
+                      ))
+                  )
               : <Grid item xs={12}><Chip label="尚未設定" /></Grid>}
           </Grid>
         </CardContent>
       </Card>
 
       {/* 📣 社群平台設定 */}
-      <Card variant="outlined" sx={{ mb: 3 }}>
+      <Card variant="outlined" sx={{ mb: 3, overflowX: 'hidden' }}>
         <CardContent>
           <Typography variant="h6"><ShareIcon sx={{ mr: 1 }} />社群平台設定</Typography>
           <Divider sx={{ my: 1 }} />
 
-          {/* 發文頻率 */}
           <Box mb={2}>
             <Typography variant="subtitle2">發文排程</Typography>
             <Typography variant="body2">
@@ -170,7 +190,6 @@ export default function SettingsReviewPanel() {
 
           <Divider sx={{ my: 2 }} />
 
-          {/* 各平台憑證 */}
           {socialConfig && Object.keys(socialConfig).some(k => !k.startsWith('post_')) ? (
             Object.entries(socialConfig).filter(([key]) => !key.startsWith('post_')).map(([platform, fields]) => (
               <Box key={platform} mb={2}>
@@ -182,7 +201,7 @@ export default function SettingsReviewPanel() {
                     key={`${platform}-${field}`}
                     variant="body2"
                     color="text.secondary"
-                    sx={{ ml: 2 }}
+                    sx={{ ml: 2, wordBreak: 'break-word' }}
                   >
                     {field}: {value ? '✅ 已填寫' : '❌ 未填寫'}
                   </Typography>
@@ -196,6 +215,24 @@ export default function SettingsReviewPanel() {
           )}
         </CardContent>
       </Card>
+
+      {/* 📢 廣告設定 */}
+      {adConfig && Array.isArray(adConfig) && adConfig.length > 0 && (
+        <Card variant="outlined" sx={{ mb: 3 }}>
+          <CardContent>
+            <Typography variant="h6"><ImageIcon sx={{ mr: 1 }} />廣告設定</Typography>
+            <Divider sx={{ my: 1 }} />
+
+            {adConfig.map((ad, idx) => (
+              <Box key={idx} mb={2}>
+                <Typography variant="subtitle2" gutterBottom>第 {idx + 1} 則廣告</Typography>
+                <Typography variant="body2">圖片：{ad.image || '未提供'}</Typography>
+                <Typography variant="body2">連結：{ad.link || '未提供'}</Typography>
+              </Box>
+            ))}
+          </CardContent>
+        </Card>
+      )}
 
       <Box textAlign="right" mt={3}>
         <Button variant="contained" color="primary" size="large" onClick={handleSubmitToN8N}>

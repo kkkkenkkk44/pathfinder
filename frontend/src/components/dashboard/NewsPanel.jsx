@@ -18,6 +18,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import TagIcon from '@mui/icons-material/Tag';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import DomainIcon from '@mui/icons-material/Language';
 import { AppContext } from '../../context/AppContext';
 
 const frequencyTypes = [
@@ -46,6 +47,8 @@ export default function NewsPanel({ onSave }) {
   const [frequencyHour, setFrequencyHour] = useState('00');
   const [weekDay, setWeekDay] = useState('0');
   const [repo, setRepo] = useState('');
+  const [siteName, setSiteName] = useState('');
+  const [customDomain, setCustomDomain] = useState('');
 
   useEffect(() => {
     if (newsConfig) {
@@ -55,6 +58,8 @@ export default function NewsPanel({ onSave }) {
       setFrequencyHour(newsConfig.frequency_hour || '00');
       setWeekDay(newsConfig.frequency_day || '0');
       setRepo(newsConfig.repo || '');
+      setSiteName(newsConfig.site_name || '');
+      setCustomDomain(newsConfig.custom_domain || '');
     }
   }, [newsConfig]);
 
@@ -73,13 +78,20 @@ export default function NewsPanel({ onSave }) {
   };
 
   const handleSubmit = () => {
+    const cron = frequencyType === 'weekly'
+      ? `0 ${frequencyHour} * * ${weekDay}`
+      : `0 ${frequencyHour} * * *`;
+
     const payload = {
       keywords,
       urls,
       frequency_type: frequencyType,
       frequency_hour: frequencyHour,
       frequency_day: frequencyType === 'weekly' ? weekDay : undefined,
+      cron,
       repo,
+      site_name: siteName,
+      custom_domain: customDomain,
     };
     console.log('📤 Submitting:', payload);
     setNewsConfig(payload);
@@ -161,7 +173,7 @@ export default function NewsPanel({ onSave }) {
             </Box>
           </Grid>
 
-          {/* 頻率類型 */}
+          {/* 抓取頻率 */}
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
               <InputLabel>抓取頻率</InputLabel>
@@ -234,10 +246,45 @@ export default function NewsPanel({ onSave }) {
               }}
             />
           </Grid>
+
+          {/* 網站名稱 */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="網站名稱"
+              variant="outlined"
+              fullWidth
+              value={siteName}
+              onChange={(e) => setSiteName(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <DomainIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+
+          {/* 自訂網域 */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="自訂網域，之後需要到Cloudflare設定"
+              variant="outlined"
+              fullWidth
+              value={customDomain}
+              onChange={(e) => setCustomDomain(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <DomainIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
         </Grid>
       </Paper>
 
-      {/* 外部按鈕，與 PromptPanel 相同設計 */}
       <Box mt={3} textAlign="right">
         <Button variant="contained" color="primary" onClick={handleSubmit}>
           儲存設定

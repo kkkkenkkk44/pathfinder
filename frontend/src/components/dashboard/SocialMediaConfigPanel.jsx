@@ -66,17 +66,29 @@ export default function SocialMediaConfigPanel({ onSave }) {
   };
 
   const handleSaveAll = () => {
+    let cron = '';
+    const hour = postFrequencyHour.padStart(2, '0');
+  
+    if (postFrequencyType === 'daily') {
+      cron = `0 ${hour} * * *`; // 每天固定小時
+    } else if (postFrequencyType === 'weekly') {
+      cron = `0 ${hour} * * ${postWeekDay}`; // 每週特定星期幾與小時
+    }
+  
     const configPayload = {
       ...platformCredentials,
       post_frequency_type: postFrequencyType,
       post_frequency_hour: postFrequencyHour,
-      post_frequency_day: postFrequencyType === 'weekly' ? postWeekDay : undefined,
+      post_frequency_day: postWeekDay,  // ✅ 使用正確的變數
+      post_cron: cron,
     };
-
-    console.log('🧾 儲存社群設定：', configPayload);
+  
+    console.log('🧾 儲存社群設定（含 cron）：', configPayload);
     setSocialConfig(configPayload);
     if (onSave) onSave(configPayload);
   };
+  
+  
 
   const credentialFields = {
     Facebook: ['client_id', 'client_secret', 'access_token'],

@@ -8,6 +8,7 @@ import SettingsReviewPanel from '../components/dashboard/SettingsReviewPanel';
 import LogoutPanel from '../components/dashboard/LogoutPanel';
 import SocialMediaConfigPanel from '../components/dashboard/SocialMediaConfigPanel'; // 👈 新增這行
 import { AppContext } from '../context/AppContext';
+import AdPanel from '../components/dashboard/AdPanel';
 
 const drawerWidth = 240;
 
@@ -15,7 +16,7 @@ export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState('News');
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { setNewsConfig, setPromptConfig, setSocialConfig } = useContext(AppContext); // 👈 多加入 setSocialConfig
+  const { setNewsConfig, setPromptConfig, setSocialConfig, setAdConfig } = useContext(AppContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -27,6 +28,8 @@ export default function Dashboard() {
         return <NewsPanel onSave={(data) => setNewsConfig(data)} />;
       case 'Prompt':
         return <PromptPanel onSave={(data) => setPromptConfig(data)} />;
+      case 'Advertisement':
+        return <AdPanel onSave={(data) => setAdConfig(data)} />;
       case 'Settings Review':
         return <SettingsReviewPanel />;
       case 'Social Media':

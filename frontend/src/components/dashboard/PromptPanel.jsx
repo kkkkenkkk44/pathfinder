@@ -17,7 +17,7 @@ const platforms = ['Facebook', 'Threads', 'Instagram', 'X'];
 const languages = [
   { label: '中文', code: 'zh' },
   { label: 'English', code: 'en' },
-  { label: '日本語', code: 'ja' },
+  { label: '日本語', code: 'jp' },
 ];
 
 export default function PromptPanel({ onSave }) {
@@ -25,15 +25,15 @@ export default function PromptPanel({ onSave }) {
 
   const [summaryPrompt, setSummaryPrompt] = useState(
     {
-        zh: `你是一位專業的內容編輯，擅長將各類原始文本（如報告、訪談、文章、研究、演講稿等）濃縮為條理清晰、邏輯嚴謹的摘要。你的任務是協助讀者快速掌握背景脈絡、核心觀點與重點內容，必要時也可點出後續發展、可能影響或關鍵討論。請使用繁體中文撰寫，語氣自然流暢，資訊準確中立。摘要應避免贅詞，強調結構性與可讀性，並可作為後續深入分析、報導撰寫、或 SEO 優化內容的基礎。`,
-        en: `You are a professional content editor who specializes in condensing various types of source texts—such as reports, interviews, articles, research papers, and speeches—into clear, well-structured summaries. Your task is to help readers quickly grasp the background, core viewpoints, and key takeaways. When necessary, you may also highlight follow-up developments, potential impacts, or important discussions. Please write in English with a natural and fluent tone, ensuring information is accurate and objective. The summary should avoid redundancy, emphasize logical structure and readability, and serve as a foundation for in-depth analysis, reporting, or SEO-optimized content.`, 
-        ja: `あなたはプロのコンテンツ編集者であり、レポート、インタビュー、記事、研究、スピーチなど、さまざまな種類の原文を、構成が明確で論理的な要約にまとめることを専門としています。あなたの役割は、読者が背景、核心的な視点、重要なポイントを迅速に把握できるよう支援することです。必要に応じて、今後の展開、影響の可能性、または注目すべき議論についても言及してください。要約は日本語で自然かつ流暢な文体で執筆し、情報は正確かつ中立である必要があります。冗長な表現を避け、構造的で読みやすい要約を心がけてください。これらの要約は、今後の詳細な分析、記事執筆、または SEO コンテンツの基盤としても使用されます。`
+        zh: `是一位專業的 SEO 新聞摘要寫手，擅長將新聞內容濃縮成具故事感、親切易懂、同時包含關鍵字的短篇摘要。請用繁體中文撰寫，適合放在文章開頭、社群貼文或搜尋引擎預覽中，並以 HTML 格式輸出（使用 <p> 包裹段落）。`,
+        en: `You are a professional SEO news summary writer. Your job is to distill news content into a short, engaging, and keyword-rich summary (300–500 words) in HTML format using <p> tags. The summary should be suitable for article previews, social posts, and search snippets.`, 
+        jp: `あなたはプロのSEOニュース要約ライターです。ニュースをもとに、HTML形式（各段落を <p> タグで囲む）でストーリー性のある要約（300〜500字）を書いてください。記事プレビューや検索結果に適した形式です。`
     });
   const [seoPrompt, setSeoPrompt] = useState(
     {
-        zh: `你是一位專業的 SEO 寫手，擅長撰寫結構清晰、語氣親切、內容權威又淺顯易懂的文章，適用於多元主題（如科技、教育、財經、生活、政策、健康、旅遊等）。請用繁體中文撰寫內容，語氣如同在與一般讀者、學生或對該領域有興趣的大眾解釋一個重要主題。文章應符合 SEO 寫作邏輯，包含段落結構明確的標題（如 <h1>、<h2>、<h3>）、適當關鍵字鋪排、通俗易懂的文字，以及具體實用的內容。請用 HTML 格式 產出全文，便於直接應用於網站。`,
-        en: '',
-        ja: '' 
+        zh: `是一位專業的 SEO 新聞寫手，擅長將新聞內容改寫成結構清楚、語氣親切、有故事感又自然流暢的文章。請用繁體中文撰寫，適合一般大眾閱讀，並符合 SEO 寫作邏輯，文章需使用 HTML 格式產出。`,
+        en: `You are a professional SEO news writer who excels at turning news content into clear, friendly, story-driven, and naturally fluent articles. Write in English for a general audience with an SEO-optimized structure in HTML. The final text must read like native-level news writing.`,
+        jp: `なたはプロのSEOニュースライターです。ニュース内容を、構造的で親しみやすく、ストーリー性があり、自然で読みやすい日本語の記事に書き換えるのが得意です。日本語で執筆し、一般の読者向けにSEO構造を持つHTML形式で出力してください。` 
     });
   const [imagePrompt, setImagePrompt] = useState('請為這篇文章生成一張符合主題、具吸引力的圖片，風格需寫實，避免過度誇張。');
   const [platformTabs, setPlatformTabs] = useState({});
@@ -43,8 +43,8 @@ export default function PromptPanel({ onSave }) {
 
   useEffect(() => {
     if (promptConfig) {
-      setSummaryPrompt(promptConfig.summary_prompt || { zh: '', en: '', ja: '' });
-      setSeoPrompt(promptConfig.seo_prompt || { zh: '', en: '', ja: '' });
+      setSummaryPrompt(promptConfig.summary_prompt || { zh: '', en: '', jp: '' });
+      setSeoPrompt(promptConfig.seo_prompt || { zh: '', en: '', jp: '' });
       setImagePrompt(promptConfig.image_prompt || '');
       setPlatformTabs(promptConfig.platform_prompts || {});
     }

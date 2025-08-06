@@ -6,7 +6,8 @@ export const AppProvider = ({ children }) => {
   const [newsConfig, setNewsConfig] = useState(null);
   const [promptConfig, setPromptConfig] = useState(null);
   const [githubToken, setGithubToken] = useState(null);
-  const [socialConfig, setSocialConfig] = useState(null); // ✅ 新增這行
+  const [socialConfig, setSocialConfig] = useState(null);
+  const [adConfig, setAdConfig] = useState(null);
 
   useEffect(() => {
     const tokenFromStorage = localStorage.getItem('github_token');
@@ -26,6 +27,8 @@ export const AppProvider = ({ children }) => {
         setGithubToken,
         socialConfig,
         setSocialConfig,
+        adConfig,
+        setAdConfig,
       }}
     >
       {children}
