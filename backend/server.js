@@ -4,6 +4,12 @@ import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 dotenv.config({ path: '../.env' });
 
@@ -53,7 +59,7 @@ app.post('/auth/github/callback', async (req, res) => {
 // 📝 儲存使用者設定為 config/config.json
 app.post('/save-config', (req, res) => {
   const config = req.body;
-  const configDir = path.join(process.cwd(), 'config');
+  const configDir = path.resolve(__dirname, './config');
   const configPath = path.join(configDir, 'config.json');
 
   try {

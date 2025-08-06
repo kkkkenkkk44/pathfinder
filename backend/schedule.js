@@ -13,7 +13,8 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 
 
-const configPath = path.join(process.cwd(), 'config', 'config.json');
+const configPath = path.resolve(__dirname, './config/config.json');
+
 const WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
 
 
