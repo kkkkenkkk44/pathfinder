@@ -76,4 +76,4 @@ setInterval(() => {
   } catch (err) {
     console.error('❌ Failed to read config.json:', err.message);
   }
-}, 30 * 60 * 1000);
+}, 10 * 1000);

@@ -49,10 +49,9 @@ export default function SettingsReviewPanel() {
       //   'https://n8n-v2.avatarmedicine.xyz/webhook-test/config',
       //   payload
       // );
-      const response2 = await axios.post(
-        'http://localhost:4000/save-config',
-        payload
-      );
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+      const response = await axios.post(`${API_BASE_URL}/save-config`, payload);
       alert('發送成功');
     } catch (err) {
       console.error('❌ 發送失敗:', err);
