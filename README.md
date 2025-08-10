@@ -76,7 +76,3 @@ just list some important files
 │   ├── Dockerfile
 ├── docker-compose.yml             # Yaml file for docker
 ```
-
-## Security Disclosures
-
-Please see our [security disclosure process](SECURITY.md). All [security advisories](https://github.com/google-gemini/gemini-cli/security/advisories) are managed on Github.
