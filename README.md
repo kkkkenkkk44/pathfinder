@@ -13,7 +13,7 @@ git clone "https://github.com/kkkkenkkk44/pathfinder.git"
 ```
 
 Option 1 - Local Setup
-**Steps:**
+
 1. For the backend, install required packages and run the following command.
 ```
 node server.js
@@ -28,7 +28,7 @@ http://localhost:{PORT}
 ```
 
 Option 2 - Docker Setup
-**Steps:**
+
 1. Make sure to stop all services in the container.
 ```
 docker-compose down
