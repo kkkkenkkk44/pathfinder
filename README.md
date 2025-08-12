@@ -76,3 +76,9 @@ just list some important files
 │   ├── Dockerfile
 ├── docker-compose.yml                             # Yaml file for docker
 ```
+
+## To Do
+1. Social Media Posting users' own account(social media authentication)
+2. Add webiste banner
+3. Image generation using local LLM
+4. Deploy the system using customized domain name
