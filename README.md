@@ -18,7 +18,7 @@ Option 1 - Local Setup
 ```
 node server.js
 ```
-2. For the fronted, install required packages and run the following command.
+2. For the frontend, install required packages and run the following command.
 ```
 npm run dev
 ```
