@@ -49,6 +49,8 @@ setInterval(() => {
         } catch (err) {
           console.error('❌ News webhook failed:', err.message);
         }
+      }, {
+        timezone: "Asia/Taipei"
       });
 
       console.log(`🔁 News cron updated to: ${currentNewsCron}`);
