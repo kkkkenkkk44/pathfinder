@@ -78,7 +78,7 @@ just list some important files
 ```
 
 ## To Do
-1. Social Media Posting users' own account(social media authentication)
+1. Social Media Posting users' own accounts (social media authentication)
 2. Add webiste banner
 3. Image generation using local LLM
 4. Deploy the system using customized domain name
