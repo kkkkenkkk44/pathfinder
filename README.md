@@ -58,7 +58,7 @@ just list some important files
 ├── frontend
 │   └── src
 │   │   └── components                             # Saves all setting content from frontend
-│   │   │   └── dashboard                          # Packages all configs from each panel in one context
+│   │   │   └── dashboard                          
 │   │   │   │   └── AdPanel.jsx                    # Ad panel design
 │   │   │   │   └── LogoutPanel.jsx                # Log out panel design
 │   │   │   │   └── NewsPanel.jsx                  # Keywords and sources panel design
@@ -67,7 +67,7 @@ just list some important files
 │   │   │   │   └──SocialMediaConfigPanel.jsx      # Social media credentials panel design
 │   │   │   └── AppBarHeader.jsx                   # Website header design
 │   │   │   └── DrawerSidebar.jsx                  # Handles drawer side bar
-│   │   └── context                                # Saves all setting content from frontend
+│   │   └── context                                
 │   │   │   └── AppContext.jsx                     # Packages all configs from each panel in one context
 │   │   └── pages
 │   │   │   └── Callback.jsx                       # Handles GitHub Authentication callback
