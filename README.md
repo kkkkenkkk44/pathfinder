@@ -77,6 +77,9 @@ just list some important files
 ├── docker-compose.yml                             # Yaml file for docker
 ```
 
+## Demo Video Link
+https://youtu.be/nKTrAWpaHwM
+
 ## To Do
 1. Social Media posting using users' own accounts (social media authentication)
 2. Add website banner
